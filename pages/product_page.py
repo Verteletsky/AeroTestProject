@@ -1,6 +1,6 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import time
 from .base_page import BasePage
 from .locators import ProductPageLocators
 from selenium import webdriver
@@ -28,11 +28,21 @@ class ProductPage(BasePage):
     def click_button_to_basket(self):
         btn_basket = self.browser.find_element(*ProductPageLocators.BUTTON_BASKET)
         btn_basket.click()
-        self.solve_quiz_and_get_code()
+        # self.solve_quiz_and_get_code()
+
+    def should_not_be_success_message(self):
+        # is_not_element_present: упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый.
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_dissapear_of_success_message(self):
+        # is_disappeared: будет ждать до тех пор, пока элемент не исчезнет.
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Not success message is disappered"
 
     def check_product(self):
         self.check_name_product()
-        self.check_price_product()
+        # self.check_price_product()
 
     def check_name_product(self):
         added_title_product = self.browser.find_element(*ProductPageLocators.PRODUCT_TITLE)
