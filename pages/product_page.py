@@ -26,7 +26,7 @@ class ProductPage(BasePage):
             print("No second alert presented")
 
     def click_button_to_basket(self):
-        btn_basket = self.browser.find_element(*ProductPageLocators.BUTTON_BASKET)
+        btn_basket = self.browser.find_element(*ProductPageLocators.ADD_BUTTON_BASKET)
         btn_basket.click()
         # self.solve_quiz_and_get_code()
 
